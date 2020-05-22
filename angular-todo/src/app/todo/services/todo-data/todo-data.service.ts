@@ -1,21 +1,19 @@
-import { Injectable, Input } from '@angular/core';
-import { TodoModel, Todo } from '../../models/Todo';
+import { Injectable } from '@angular/core';
+import { TodoModel } from '../../models/Todo';
+
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TodoDataService {
 
-  private static defaultTodoList: TodoModel[] = [
-    new Todo(1, 'Learn Angular', false),
-    new Todo(2, 'Training', false),
-    new Todo(3, 'Eat an apple', false),
-    new Todo(4, 'Buy a car', false),
-    new Todo(5, 'Call Mom', false),
-  ];
+  private baseUrl: string = 'assets';
 
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
-  getTodoList(): TodoModel[] {
-    console.log('create');
-    return TodoDataService.defaultTodoList;
+  public loadTodoList(): Observable<TodoModel[]> {
+    return this.httpClient.get<TodoModel[]>(`${this.baseUrl}/todo-list.json`);
   }
 }

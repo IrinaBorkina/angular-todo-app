@@ -12,6 +12,7 @@ import { TodoSearchComponent } from './components/todo-search/todo-search.compon
 
 import { TodoListService } from './services/todo-list/todo-list.service';
 import { TodoDataService } from './services/todo-data/todo-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TodoDataService } from './services/todo-data/todo-data.service';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     TodoListService,

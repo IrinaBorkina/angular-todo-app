@@ -14,7 +14,10 @@ export class TodoListService {
   public isEditMode: boolean = false;
 
   constructor( private todoDataService: TodoDataService ) {
-    this.todos = this.todoDataService.getTodoList();
+    this.todoDataService.loadTodoList()
+    .subscribe((data: TodoModel[]) => {
+      this.todos = data;
+    });
   }
 
   public todoCreated(title: string): void {

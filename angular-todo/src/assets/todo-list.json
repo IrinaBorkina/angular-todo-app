@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Learn Angular",
+    "status": true
+  },
+  {
+    "id": 2,
+    "title": "Training",
+    "status": false
+  },
+  {
+    "id": 3,
+    "title": "Eat an apple",
+    "status": false
+  },
+  {
+    "id": 4,
+    "title": "Buy a car",
+    "status": true
+  },
+  {
+    "id": 5,
+    "title": "Call Mom",
+    "status": false
+  }
+]

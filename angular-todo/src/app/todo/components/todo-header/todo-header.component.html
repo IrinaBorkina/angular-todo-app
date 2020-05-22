@@ -1,0 +1,8 @@
+<div class="form-group header">
+  <div class="input-group-prepend header__add">
+    <input class="form-control header__input" placeholder="What needs to be done?" autofocus [(ngModel)]="title"
+      (ngModelChange)="changeTitle()" (keyup.enter)="addTodo()">
+    <button class="btn btn-primary header__button" (click)="addTodo()" [disabled]="!canBeAdded()">Add</button>
+  </div>
+  <p class="header__hidden-text" [hidden]="!isTodoAdded">Todo added</p>
+</div>

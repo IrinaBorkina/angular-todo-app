@@ -1,0 +1,25 @@
+.filter,
+.check-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.filter {
+  margin: 10px 0;
+}
+
+.check-block {
+  margin-bottom: 10px;
+
+  .label__control {
+    cursor: pointer;
+    margin-left: 5px;
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+}

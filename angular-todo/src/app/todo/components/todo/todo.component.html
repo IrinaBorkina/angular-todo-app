@@ -1,0 +1,10 @@
+<ng-container *ngTemplateOutlet="headerTitle"></ng-container>
+
+<ng-template #headerTitle>
+  <div class="logo">
+    <h1 class="text-center text-primary logo__title">Todo App</h1>
+  </div>
+</ng-template>
+
+<app-todo-header (todoCreated)="todoListService.todoCreated($event)"></app-todo-header>
+<app-todo-list [todos]="todos"></app-todo-list>

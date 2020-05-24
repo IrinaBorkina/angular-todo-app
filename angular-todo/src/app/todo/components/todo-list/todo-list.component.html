@@ -1,6 +1,7 @@
-<div class="input-group-prepend sort-block">
-  <button type="button" class="btn btn-outline-primary sort__button" (click)="todoListService.sort()">Sort</button>
-  <app-todo-search (searchModel)="todoListService.searchTodo($event)"></app-todo-search>
+<div class="input-group-prepend sort-block" *ngIf="todoListService.settings">
+  <button class="btn btn-outline-primary sort__button" (click)="todoListService.sort()" *ngIf="todoListService.settings.isSortActive">Sort</button>
+  <app-todo-search (searchModel)="todoListService.searchTodo($event)" *ngIf="todoListService.settings.isSearchActive"></app-todo-search>
+  <button class="btn btn-primary save__button" (click)="todoListService.save()">Save Todos</button>
 </div>
 
 <div class="btn-group filter" role="group">

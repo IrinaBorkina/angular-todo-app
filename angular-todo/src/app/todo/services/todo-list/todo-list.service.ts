@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { TodoModel, Todo } from '../../models/Todo';
 import { TodoDataService } from '../todo-data/todo-data.service';
+import { TodoListSetting } from '../../models/todo-list-settings';
+import { Subject, combineLatest } from 'rxjs';
+import { takeUntil, take, delay } from 'rxjs/operators';
 
 
 @Injectable()
-export class TodoListService {
+export class TodoListService implements OnDestroy {
   public todos: TodoModel[] = [];
   public id: number;
   public todoSorted: boolean = false;
@@ -12,26 +15,49 @@ export class TodoListService {
   public filter: string = 'all';
   public anyRemainingModel: boolean = true;
   public isEditMode: boolean = false;
+  public settings: TodoListSetting = null;
+  // public isTodoListSaved: boolean = false;
+
+
+  private destroySubject$: Subject<boolean> = new Subject<boolean>();
 
   constructor( private todoDataService: TodoDataService ) {
-    this.todoDataService.loadTodoList()
-    .subscribe((data: TodoModel[]) => {
+
+    combineLatest([
+      this.todoDataService.loadTodoList()
+        .pipe(
+          delay(1000),
+          take(1),
+          takeUntil(this.destroySubject$)
+        ),
+
+      this.todoDataService.loadSettings()
+      .pipe(
+        delay(2000),
+        take(1),
+        takeUntil(this.destroySubject$)
+      )])
+    .subscribe(([data, settings]: [TodoModel[], TodoListSetting]) => {
       this.todos = data;
+      this.settings = settings;
     });
+
+  }
+
+  ngOnDestroy() {
+    this.destroySubject$.next(true);
+    this.destroySubject$.complete();
   }
 
   public todoCreated(title: string): void {
-    console.log('add');
     this.todos = [...this.todos, new Todo(Math.floor(Math.random() * 100), title, false)];
   }
 
   public deleteTodo(id: number): void {
-    console.log('del');
     this.todos = this.todos.filter(todo => todo.id !== id);
   }
 
   public editTodo(): void {
-    console.log('edit1');
     this.isEditMode = !this.isEditMode;
   }
 
@@ -45,7 +71,6 @@ export class TodoListService {
       return result ? 1 : -1;
     });
     this.todoSorted = !this.todoSorted;
-    console.log('sort');
   }
 
   public searchTodo(value: string): void {
@@ -84,4 +109,17 @@ export class TodoListService {
     return this.todos;
   }
 
+  // public changeTodoList(): void {
+  //   this.isTodoListSaved = false;
+  // }
+
+  public save(): void {
+    // this.todos = this.todos.map((todo: TodoModel) => {
+    //   const currentUser: TodoModel = this.todos.find((otherUser: TodoModel) => otherUser.id === todo.id);
+    //   return currentUser || todo;
+    // });
+    // this.isTodoListSaved = true;
+
+    this.todoDataService.save(this.todos);
+  }
 }

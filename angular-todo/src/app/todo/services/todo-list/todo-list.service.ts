@@ -25,14 +25,14 @@ export class TodoListService implements OnDestroy {
     combineLatest([
       this.todoDataService.loadTodoList()
         .pipe(
-          delay(1000),
+          // delay(1000),
           take(1),
           takeUntil(this.destroySubject$)
         ),
 
       this.todoDataService.loadSettings()
       .pipe(
-        delay(2000),
+        // delay(2000),
         take(1),
         takeUntil(this.destroySubject$)
       )])
@@ -66,6 +66,8 @@ export class TodoListService implements OnDestroy {
   }
 
   public todoCreated(title: string): void {
+    // const randomId = Math.floor(Math.random() * 100);
+    // this.todos = [...this.todos, new Todo(randomId, title, false)];
     this.todos = [...this.todos, new Todo(Math.floor(Math.random() * 100), title, false)];
   }
 

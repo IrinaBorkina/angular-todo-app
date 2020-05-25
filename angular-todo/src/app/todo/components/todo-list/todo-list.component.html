@@ -1,6 +1,8 @@
 <div class="input-group-prepend sort-block" *ngIf="todoListService.settings">
-  <button class="btn btn-outline-primary sort__button" (click)="todoListService.sort()" *ngIf="todoListService.settings.isSortActive">Sort</button>
-  <app-todo-search (searchModel)="todoListService.searchTodo($event)" *ngIf="todoListService.settings.isSearchActive"></app-todo-search>
+  <button class="btn btn-outline-primary sort__button" (click)="todoListService.sort()"
+    *ngIf="todoListService.settings.isSortActive">Sort</button>
+  <app-todo-search (searchModel)="todoListService.searchTodo($event)" *ngIf="todoListService.settings.isSearchActive">
+  </app-todo-search>
   <button class="btn btn-primary save__button" (click)="todoListService.save()">Save Todos</button>
 </div>
 
@@ -9,14 +11,15 @@
     (click)="todoListService.filter='all'">All</button>
   <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': todoListService.filter === 'active'}"
     (click)="todoListService.filter='active'">Active</button>
-  <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': todoListService.filter === 'completed'}"
+  <button class="btn btn-outline-info btn-sm filter__button"
+    [ngClass]="{'active': todoListService.filter === 'completed'}"
     (click)="todoListService.filter='completed'">Completed</button>
 </div>
 
 <div class="check-block">
   <div class="form-check checkbox-inner pt-2">
     <input type="checkbox" class="form-check-input checkbox__control" (change)="todoListService.checkAllTodos($event)"
-    id="allCheck" [(ngModel)]="!todoListService.anyRemainingModel">
+      id="allCheck" [(ngModel)]="!todoListService.anyRemainingModel">
     <label class="form-check-label label__control" for="allCheck">Check All Todos</label>
   </div>
 
@@ -30,9 +33,10 @@
 
 <div class="todo-list">
   <ul class="list-group list">
-    <app-todo-list-item *ngFor="let todo of todoListService.todosFiltered() | listFilter: todoListService.todoSearch; let i = index"
-      [todo]="todo" [id]="todo.id" [index]="i" (deletedItem)="todoListService.deleteTodo($event)" [isTodoSelected]="todoListService.isTodoSelected(todo)"
-      (onTodoSelect)="todoListService.selectTodo($event)">
+    <app-todo-list-item
+      *ngFor="let todo of todoListService.todosFiltered() | listFilter: todoListService.todoSearch; let i = index"
+      [todo]="todo" [id]="todo.id" [index]="i" (deletedItem)="todoListService.deleteTodo($event)"
+      [isTodoSelected]="todoListService.isTodoSelected(todo)" (onTodoSelect)="selectTodo($event.id)">
     </app-todo-list-item>
   </ul>
 </div>

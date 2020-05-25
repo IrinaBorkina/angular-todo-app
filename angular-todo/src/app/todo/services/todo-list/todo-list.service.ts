@@ -1,9 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { TodoModel, Todo } from '../../models/Todo';
 import { TodoDataService } from '../todo-data/todo-data.service';
+import { combineLatest, Subject } from 'rxjs';
+import { delay, take, takeUntil } from 'rxjs/operators';
 import { TodoListSetting } from '../../models/todo-list-settings';
-import { Subject, combineLatest } from 'rxjs';
-import { takeUntil, take, delay } from 'rxjs/operators';
 
 
 @Injectable()
@@ -16,8 +16,6 @@ export class TodoListService implements OnDestroy {
   public anyRemainingModel: boolean = true;
   public isEditMode: boolean = false;
   public settings: TodoListSetting = null;
-  // public isTodoListSaved: boolean = false;
-
 
   private destroySubject$: Subject<boolean> = new Subject<boolean>();
 
@@ -109,17 +107,7 @@ export class TodoListService implements OnDestroy {
     return this.todos;
   }
 
-  // public changeTodoList(): void {
-  //   this.isTodoListSaved = false;
-  // }
-
   public save(): void {
-    // this.todos = this.todos.map((todo: TodoModel) => {
-    //   const currentUser: TodoModel = this.todos.find((otherUser: TodoModel) => otherUser.id === todo.id);
-    //   return currentUser || todo;
-    // });
-    // this.isTodoListSaved = true;
-
     this.todoDataService.save(this.todos);
   }
 }

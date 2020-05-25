@@ -8,7 +8,7 @@ import { TodoListSetting } from '../../models/todo-list-settings';
 
 @Injectable()
 export class TodoDataService {
-  private static userListLSKey: string = 'app--todo-list';
+  private static userListLSKey: string = 'todo-list';
   private baseUrl: string = 'assets';
 
   constructor(
@@ -48,13 +48,4 @@ export class TodoDataService {
     );
   }
 
-  // public save(uls: UserListSnapshot): void {
-  //   localStorage.setItem(
-  //     UserListDataService.userListLSKey,
-  //     JSON.stringify(
-  //       UserListSnapshot.toJSON(uls)
-  //     )
-  //   );
-  //   this.loadUserList();
-  // }
 }

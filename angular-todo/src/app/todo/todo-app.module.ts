@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     TodoHeaderComponent,
     TodoListItemComponent,
     ListFilterPipe,
-    TodoSearchComponent
+    TodoSearchComponent,
   ],
   imports: [
     CommonModule,

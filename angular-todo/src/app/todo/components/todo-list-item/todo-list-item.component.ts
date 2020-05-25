@@ -10,32 +10,10 @@ import { TodoListService } from '../../services/todo-list/todo-list.service';
   styleUrls: ['./todo-list-item.component.scss'],
 })
 export class TodoListItemComponent {
-  // @Input() public todos: TodoModel[] = [];
   @Input() public todo: TodoModel;
   @Input() public index: number = null;
-
   @Output() public deletedItem: EventEmitter<TodoModel> = new EventEmitter();
-
-  // public isEditMode: boolean = false;
 
   constructor(public todoListService: TodoListService) {}
 
-  // public deleteTodo(todo): void {
-  //   console.log('del3');
-  //   this.deletedItem.emit(todo);
-  // }
-
-  // public deleteTodo(todo): void {
-  //   console.log('del3');
-  //   this.todoListService.deleteTodo(todo);
-  // }
-
-  // public editTodo(): void {
-  //   this.isEditMode = !this.isEditMode;
-  // }
-
-  // public editTodo(): void {
-  //   console.log('edit2');
-  //   this.todoListService.editTodo();
-  // }
 }

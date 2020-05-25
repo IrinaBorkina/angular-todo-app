@@ -1,3 +1,21 @@
 <div class="container">
-  <app-todo></app-todo>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/todos" routerLinkActive="active">Todo List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/todo-info" routerLinkActive="active">Todo Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/not-found" routerLinkActive="active">Not Found</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="app--router-outlet">
+    <router-outlet></router-outlet>
+  </div>
 </div>

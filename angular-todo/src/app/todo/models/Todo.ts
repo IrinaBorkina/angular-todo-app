@@ -2,6 +2,7 @@ export interface TodoModel {
   id: number;
   title: string;
   status: boolean;
+  equals(todo: TodoModel): boolean;
 }
 
 export class Todo implements TodoModel {
@@ -22,5 +23,12 @@ export class Todo implements TodoModel {
         status: todo.status
       }
       : {};
+  }
+
+  public equals(todo: TodoModel): boolean {
+    return Boolean(todo)
+      && this.id === todo.id
+      && this.title === todo.title
+      && this.status === todo.status;
   }
 }

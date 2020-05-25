@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, HostListener } from '@angular/core';
 import { TodoModel } from '../../models/Todo';
 
 import { TodoListService } from '../../services/todo-list/todo-list.service';
@@ -14,6 +14,20 @@ export class TodoListItemComponent {
   @Input() public index: number = null;
   @Output() public deletedItem: EventEmitter<TodoModel> = new EventEmitter();
 
+  @Input() public isTodoSelected: boolean = false;
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() public onTodoSelect: EventEmitter<TodoModel> = new EventEmitter<TodoModel>();
+
+  public isEditMode: boolean = false;
+
   constructor(public todoListService: TodoListService) {}
 
+  public editTodo(): void {
+    this.isEditMode = !this.isEditMode;
+  }
+
+  @HostListener('click')
+  public selectTodo(): void {
+    this.onTodoSelect.emit(this.todo);
+  }
 }

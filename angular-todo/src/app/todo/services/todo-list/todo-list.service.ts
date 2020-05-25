@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { TodoModel, Todo } from '../../models/Todo';
 import { TodoDataService } from '../todo-data/todo-data.service';
-import { combineLatest, Subject } from 'rxjs';
+import { combineLatest, Subject, ReplaySubject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
 import { TodoListSetting } from '../../models/todo-list-settings';
 
@@ -14,10 +14,11 @@ export class TodoListService implements OnDestroy {
   public todoSearch: string = '';
   public filter: string = 'all';
   public anyRemainingModel: boolean = true;
-  public isEditMode: boolean = false;
   public settings: TodoListSetting = null;
+  public selectedTodo: Todo = null;
 
   private destroySubject$: Subject<boolean> = new Subject<boolean>();
+  public savedUserList$: ReplaySubject<TodoModel[]> = new ReplaySubject<TodoModel[]>(1);
 
   constructor( private todoDataService: TodoDataService ) {
 
@@ -37,6 +38,7 @@ export class TodoListService implements OnDestroy {
       )])
     .subscribe(([data, settings]: [TodoModel[], TodoListSetting]) => {
       this.todos = data;
+      this.savedUserList$.next(this.todos);
       this.settings = settings;
     });
 
@@ -47,16 +49,28 @@ export class TodoListService implements OnDestroy {
     this.destroySubject$.complete();
   }
 
+  public selectTodo(todo: TodoModel) {
+    if (this.canSelect(todo)) {
+      this.selectedTodo = todo;
+    }
+  }
+
+  public canSelect(todo: TodoModel): boolean {
+    return Boolean(todo)
+      && (!this.selectedTodo || this.selectedTodo.id !== todo.id);
+  }
+
+  public isTodoSelected(todo: TodoModel) {
+    return Boolean(this.selectedTodo)
+      && this.selectedTodo.equals(todo);
+  }
+
   public todoCreated(title: string): void {
     this.todos = [...this.todos, new Todo(Math.floor(Math.random() * 100), title, false)];
   }
 
   public deleteTodo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
-  }
-
-  public editTodo(): void {
-    this.isEditMode = !this.isEditMode;
   }
 
   public sort(): void {

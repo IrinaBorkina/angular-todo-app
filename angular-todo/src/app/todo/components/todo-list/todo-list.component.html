@@ -31,7 +31,8 @@
 <div class="todo-list">
   <ul class="list-group list">
     <app-todo-list-item *ngFor="let todo of todoListService.todosFiltered() | listFilter: todoListService.todoSearch; let i = index"
-      [todo]="todo" [id]="todo.id" [index]="i" (deletedItem)="todoListService.deleteTodo($event)">
+      [todo]="todo" [id]="todo.id" [index]="i" (deletedItem)="todoListService.deleteTodo($event)" [isTodoSelected]="todoListService.isTodoSelected(todo)"
+      (onTodoSelect)="todoListService.selectTodo($event)">
     </app-todo-list-item>
   </ul>
 </div>

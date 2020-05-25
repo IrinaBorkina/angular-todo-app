@@ -1,13 +1,13 @@
 <li class="list-group-item list__item"
   [ngClass]="{ 'list__item--done': todo.status, 'list__item--undone': !todo.status }"
-  (dblclick)="todo.status = !todo.status">
+  (dblclick)="todo.status = !todo.status" [class.selected]="isTodoSelected">
   <div class="item flex">
     <div class="item-task flex">
       <div class="item-check">
         <input type="checkbox" class="item__control" [(ngModel)]="todo.status">
       </div>
-      <div class="item-text" *ngIf="todoListService.isEditMode; else editingTodo">
-        <input type="text" class="item__title" [(ngModel)]="todo.title" (keyup.enter)="todoListService.editTodo()">
+      <div class="item-text" *ngIf="isEditMode; else editingTodo">
+        <input type="text" class="item__title" [(ngModel)]="todo.title" (keyup.enter)="editTodo()">
       </div>
 
       <ng-template #editingTodo>
@@ -16,8 +16,11 @@
     </div>
 
     <div class="item-buttons">
-      <button class="btn btn-outline-info btn-sm item__button" (click)="todoListService.editTodo()">
-        <i class="fa fa-pencil"></i> {{ todoListService.isEditMode ? 'Save' : 'Edit'}}
+      <!-- <button class="btn btn-outline-success btn-sm item__button" [class.selected]="isTodoSelected" (click)="todoListService.selectTodo(todo.id)">
+        <i class="fa fa-info"></i> Info
+      </button> -->
+      <button class="btn btn-outline-info btn-sm item__button" (click)="editTodo()">
+        <i class="fa fa-pencil"></i> {{ isEditMode ? 'Save' : 'Edit'}}
       </button>
       <button class="btn btn-outline-danger btn-sm item__button" (click)="todoListService.deleteTodo(todo.id)">
         <i class="fa fa-trash"></i> Delete

@@ -24,4 +24,8 @@
     text-decoration: line-through;
     color: grey;
   }
+
+  &.selected {
+    background-color: #ff6768;
+  }
 }

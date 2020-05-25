@@ -4,7 +4,6 @@ import { TodoInfoComponent } from './todo-info/todo-info.component';
 import { HomeComponent } from './home/home.component';
 import { TodoComponent } from './todo/components/todo/todo.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { TodoListComponent } from './todo/components/todo-list/todo-list.component';
 
 
 const routes: Routes = [
@@ -14,6 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'todos',
+    component: TodoComponent
+  },
+  {
+    path: 'todos/:id',
     component: TodoComponent
   },
   {

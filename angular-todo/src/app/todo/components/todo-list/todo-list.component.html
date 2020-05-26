@@ -1,42 +1,43 @@
-<div class="input-group-prepend sort-block" *ngIf="todoListService.settings">
-  <button class="btn btn-outline-primary sort__button" (click)="todoListService.sort()"
-    *ngIf="todoListService.settings.isSortActive">Sort</button>
-  <app-todo-search (searchModel)="todoListService.searchTodo($event)" *ngIf="todoListService.settings.isSearchActive">
+<div class="input-group-prepend sort-block" *ngIf="settings">
+  <button class="btn btn-outline-primary sort__button" (click)="sort()"
+    *ngIf="settings.isSortActive">Sort</button>
+  <app-todo-search (searchModel)="searchTodo($event)" *ngIf="settings.isSearchActive">
   </app-todo-search>
   <button class="btn btn-primary save__button" (click)="todoListService.save()">Save Todos</button>
 </div>
 
 <div class="btn-group filter" role="group">
-  <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': todoListService.filter === 'all'}"
-    (click)="todoListService.filter='all'">All</button>
-  <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': todoListService.filter === 'active'}"
-    (click)="todoListService.filter='active'">Active</button>
+  <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': filter === 'all'}"
+    (click)="filter='all'">All</button>
+  <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': filter === 'active'}"
+    (click)="filter='active'">Active</button>
   <button class="btn btn-outline-info btn-sm filter__button"
-    [ngClass]="{'active': todoListService.filter === 'completed'}"
-    (click)="todoListService.filter='completed'">Completed</button>
+    [ngClass]="{'active': filter === 'completed'}"
+    (click)="filter='completed'">Completed</button>
 </div>
 
 <div class="check-block">
   <div class="form-check checkbox-inner pt-2">
-    <input type="checkbox" class="form-check-input checkbox__control" (change)="todoListService.checkAllTodos($event)"
-      id="allCheck" [(ngModel)]="!todoListService.anyRemainingModel">
+    <input type="checkbox" class="form-check-input checkbox__control" (change)="checkAllTodos($event)"
+      id="allCheck" [(ngModel)]="!anyRemainingModel">
     <label class="form-check-label label__control" for="allCheck">Check All Todos</label>
   </div>
 
-  <div class="check-info">{{ todoListService.remaining() }} todos left</div>
+  <div class="check-info">{{ remaining() }} todos left</div>
 
-  <div *ngIf="todoListService.atLeastOneCompleted()" class="check-complete">
+  <div *ngIf="atLeastOneCompleted()" class="check-complete">
     <button class="btn btn-outline-warning btn-sm check-complete__button"
-      (click)="todoListService.clearCompleted()">Clear Completed</button>
+      (click)="clearCompleted()">Clear Completed</button>
   </div>
 </div>
 
 <div class="todo-list">
   <ul class="list-group list">
     <app-todo-list-item
-      *ngFor="let todo of todoListService.todosFiltered() | listFilter: todoListService.todoSearch; let i = index"
+      *ngFor="let todo of todosFiltered() | listFilter: todoSearch; let i = index"
       [todo]="todo" [id]="todo.id" [index]="i" (deletedItem)="todoListService.deleteTodo($event)"
-      [isTodoSelected]="todoListService.isTodoSelected(todo)" (onTodoSelect)="selectTodo($event.id)">
+      [isTodoSelected]="isTodoSelected(todo)" (onTodoSelect)="selectTodo($event)">
     </app-todo-list-item>
   </ul>
+
 </div>

@@ -7,4 +7,6 @@
 </ng-template>
 
 <app-todo-header (todoCreated)="todoListService.todoCreated($event)"></app-todo-header>
-<app-todo-list [todos]="todos"></app-todo-list>
+<app-todo-list [todos]="this.todoListService.todos$ | async" [settings]="this.todoListService.settings$ | async"
+  (todoSelect)="handleTodoSelect($event)">
+</app-todo-list>

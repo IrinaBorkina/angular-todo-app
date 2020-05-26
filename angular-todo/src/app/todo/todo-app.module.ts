@@ -13,6 +13,9 @@ import { TodoSearchComponent } from './components/todo-search/todo-search.compon
 import { TodoListService } from './services/todo-list/todo-list.service';
 import { TodoDataService } from './services/todo-data/todo-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { TodoRoutingModule } from './todo-routing.module';
+import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import { HttpClientModule } from '@angular/common/http';
     TodoListItemComponent,
     ListFilterPipe,
     TodoSearchComponent,
+    // TodoDetailsComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    TodoRoutingModule
   ],
   providers: [
     TodoListService,

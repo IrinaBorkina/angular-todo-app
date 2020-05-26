@@ -9,6 +9,7 @@ import { AppTodoModule } from './todo/todo-app.module';
 import { HomeComponent } from './home/home.component';
 import { TodoInfoComponent } from './todo-info/todo-info.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TodoRoutingModule } from './todo/todo-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
-    AppTodoModule
+    AppTodoModule,
+    TodoRoutingModule,
+    AppRoutingModule
   ],
   exports: [AppComponent],
   providers: [],

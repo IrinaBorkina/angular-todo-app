@@ -1,5 +1,6 @@
 <li class="list-group-item list__item"
   [ngClass]="{ 'list__item--done': todo.status, 'list__item--undone': !todo.status }"
+  (click)="selectTodo()"
   (dblclick)="todo.status = !todo.status" [class.selected]="isTodoSelected">
   <div class="item flex">
     <div class="item-task flex">

@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { TodoRoutingModule } from './todo/todo-routing.module';
 import { CanProceedToAboutGuard } from './guards/can-proceed-to-about.guard';
+import { TodoDetailsModule } from './todo/components/todo-details/todo-details.module';
 
 @NgModule({
   declarations: [

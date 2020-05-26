@@ -26,7 +26,9 @@ export class TodoListItemComponent {
     this.isEditMode = !this.isEditMode;
   }
 
-  public selectTodo(): void {
-    this.onTodoSelect.emit(this.todo);
-  }
+  // public selectTodo(): void {
+  //   console.log('sel');
+
+  //   this.onTodoSelect.emit(this.todo);
+  // }
 }

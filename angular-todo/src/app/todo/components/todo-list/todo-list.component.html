@@ -1,6 +1,5 @@
 <div class="input-group-prepend sort-block" *ngIf="settings">
-  <button class="btn btn-outline-primary sort__button" (click)="sort()"
-    *ngIf="settings.isSortActive">Sort</button>
+  <button class="btn btn-outline-primary sort__button" (click)="sort()" *ngIf="settings.isSortActive">Sort</button>
   <app-todo-search (searchModel)="searchTodo($event)" *ngIf="settings.isSearchActive">
   </app-todo-search>
   <button class="btn btn-primary save__button" (click)="todoListService.save()">Save Todos</button>
@@ -11,37 +10,30 @@
     (click)="filter='all'">All</button>
   <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': filter === 'active'}"
     (click)="filter='active'">Active</button>
-  <button class="btn btn-outline-info btn-sm filter__button"
-    [ngClass]="{'active': filter === 'completed'}"
+  <button class="btn btn-outline-info btn-sm filter__button" [ngClass]="{'active': filter === 'completed'}"
     (click)="filter='completed'">Completed</button>
 </div>
 
 <div class="check-block">
   <div class="form-check checkbox-inner pt-2">
-    <input type="checkbox" class="form-check-input checkbox__control" (change)="checkAllTodos($event)"
-      id="allCheck" [(ngModel)]="!anyRemainingModel">
+    <input type="checkbox" class="form-check-input checkbox__control" (change)="checkAllTodos($event)" id="allCheck"
+      [(ngModel)]="!anyRemainingModel">
     <label class="form-check-label label__control" for="allCheck">Check All Todos</label>
   </div>
 
   <div class="check-info">{{ remaining() }} todos left</div>
 
   <div *ngIf="atLeastOneCompleted()" class="check-complete">
-    <button class="btn btn-outline-warning btn-sm check-complete__button"
-      (click)="clearCompleted()">Clear Completed</button>
+    <button class="btn btn-outline-warning btn-sm check-complete__button" (click)="clearCompleted()">Clear
+      Completed</button>
   </div>
 </div>
 
 <div class="todo-list">
   <ul class="list-group list">
-    <app-todo-list-item
-      *ngFor="let todo of todosFiltered() | listFilter: todoSearch; let i = index"
-      [todo]="todo" [id]="todo.id" [index]="i" (deletedItem)="todoListService.deleteTodo($event)"
-      [isTodoSelected]="isTodoSelected(todo)" (onTodoSelect)="selectTodo($event)">
+    <app-todo-list-item *ngFor="let todo of todosFiltered() | listFilter: todoSearch; let i = index" [todo]="todo"
+      [index]="i" (deletedItem)="todoListService.deleteTodo($event)" [isTodoSelected]="isTodoSelected(todo)"
+      (onTodoSelect)="selectTodo($event)">
     </app-todo-list-item>
   </ul>
 </div>
-
-<div class="">
-  <router-outlet></router-outlet>
-</div>
-

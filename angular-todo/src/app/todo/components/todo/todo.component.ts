@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TodoListService } from '../../services/todo-list/todo-list.service';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { TodoModel } from '../../models/Todo';
 
 @Component({
@@ -40,6 +40,6 @@ export class TodoComponent implements OnInit {
   }
 
   handleTodoSelect($event: string) {
-    this.router.navigate(['/todos', $event, 'details-todo']);
+    this.router.navigate(['/todos', $event]);
   }
 }

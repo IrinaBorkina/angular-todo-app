@@ -1,6 +1,6 @@
-<li class="list-group-item list__item"
+<li class="list-group-item list__item" 
   [ngClass]="{ 'list__item--done': todo.status, 'list__item--undone': !todo.status }"
-  (click)="selectTodo()"
+
   (dblclick)="todo.status = !todo.status" [class.selected]="isTodoSelected">
   <div class="item flex">
     <div class="item-task flex">
@@ -17,9 +17,9 @@
     </div>
 
     <div class="item-buttons">
-      <!-- <button class="btn btn-outline-success btn-sm item__button" [class.selected]="isTodoSelected" (click)="todoListService.selectTodo(todo.id)">
+      <button class="btn btn-outline-success btn-sm item__button" routerLink="/todos/{{todo.id}}/details-todo">
         <i class="fa fa-info"></i> Info
-      </button> -->
+      </button>
       <button class="btn btn-outline-info btn-sm item__button" (click)="editTodo()">
         <i class="fa fa-pencil"></i> {{ isEditMode ? 'Save' : 'Edit'}}
       </button>

@@ -13,12 +13,13 @@ const routes: Routes = [
     component: TodoComponent,
   },
   {
-    path: 'todos',
+    path: 'todos/',
     component: TodoComponent,
     children: [
       {
-        path: 'todo-details',
+        path: 'details-todo',
         component: TodoDetailsComponent,
+        // loadChildren: () => import('./components/todo-details/todo-details.module').then(m => m.TodoDetailsModule)
       },
     ],
   },

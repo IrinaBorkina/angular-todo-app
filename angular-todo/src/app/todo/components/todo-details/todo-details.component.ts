@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TodoModel } from '../../models/Todo';
-import { TodoListService } from '../../services/todo-list/todo-list.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -8,15 +7,9 @@ import { TodoListService } from '../../services/todo-list/todo-list.service';
   styleUrls: ['./todo-details.component.scss']
 })
 export class TodoDetailsComponent implements OnInit {
+  @Input() public todo: TodoModel;
 
-
-  // public get todo(): TodoModel {
-  //   return selectedTodo;
-  // }
-
-  constructor(
-    // private todoListService: TodoListService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

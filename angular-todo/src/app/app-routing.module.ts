@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule)
   },
 ];
 

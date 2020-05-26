@@ -6,35 +6,31 @@ import { TodoDetailsComponent } from './components/todo-details/todo-details.com
 const routes: Routes = [
   {
     path: 'todos',
-    component: TodoComponent
-  },
-  {
-    path: 'todos/:id',
-    component: TodoComponent
+    component: TodoComponent,
   },
   {
     path: 'todos/:id',
     component: TodoComponent,
-        children: [
-        {
-            path: 'details',
-            component: TodoDetailsComponent
-        },
-        // {
-        //     path: 'photo',
-        //     component: UserPhotoComponent
-        // }
-    ]
+  },
+  {
+    path: 'todos',
+    component: TodoComponent,
+    children: [
+      {
+        path: 'todo-details',
+        component: TodoDetailsComponent,
+      },
+    ],
   },
   {
     path: 'todo-list',
     redirectTo: '/todos',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TodoRoutingModule {}

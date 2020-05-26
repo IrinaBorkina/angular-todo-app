@@ -7,26 +7,29 @@ import { AppComponent } from './app.component';
 
 import { AppTodoModule } from './todo/todo-app.module';
 import { HomeComponent } from './home/home.component';
-import { TodoInfoComponent } from './todo-info/todo-info.component';
+import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TodoRoutingModule } from './todo/todo-routing.module';
+import { CanProceedToAboutGuard } from './guards/can-proceed-to-about.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TodoInfoComponent,
-    NotFoundComponent
+    AboutComponent,
+    NotFoundComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     FormsModule,
     AppTodoModule,
     TodoRoutingModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   exports: [AppComponent],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    CanProceedToAboutGuard
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TodoModel } from '../../models/Todo';
 import { TodoListService } from '../../services/todo-list/todo-list.service';
 
@@ -9,12 +9,13 @@ import { TodoListService } from '../../services/todo-list/todo-list.service';
 })
 export class TodoDetailsComponent implements OnInit {
 
-  // public get user(): TodoModel {
-  //   return this.todoListService.selectedTodo;
+
+  // public get todo(): TodoModel {
+  //   return selectedTodo;
   // }
 
   constructor(
-    private todoListService: TodoListService
+    // private todoListService: TodoListService
   ) { }
 
   ngOnInit(): void {

@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
+import { AboutMeComponent } from '../about-me/about-me.component';
 
 @NgModule({
   declarations: [
@@ -25,21 +26,17 @@ import { TodoDetailsComponent } from './components/todo-details/todo-details.com
     TodoListItemComponent,
     ListFilterPipe,
     TodoSearchComponent,
-    // TodoDetailsComponent,
+    TodoDetailsComponent,
+    AboutMeComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     RouterModule,
-    TodoRoutingModule
+    TodoRoutingModule,
   ],
-  providers: [
-    TodoListService,
-    TodoDataService
-  ],
-  exports: [
-    TodoComponent
-  ]
+  providers: [TodoListService, TodoDataService],
+  exports: [TodoComponent],
 })
-export class AppTodoModule { }
+export class AppTodoModule {}

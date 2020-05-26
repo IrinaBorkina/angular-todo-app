@@ -2,17 +2,12 @@ import {
   Component,
   Input,
   ChangeDetectionStrategy,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
   Output,
   EventEmitter,
 } from '@angular/core';
-import { TodoModel, Todo } from '../../models/Todo';
 
+import { TodoModel, Todo } from '../../models/Todo';
 import { TodoListService } from '../../services/todo-list/todo-list.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { TodoListSetting } from '../../models/todo-list-settings';
 
 @Component({
@@ -32,8 +27,6 @@ export class TodoListComponent {
   public filter: string = 'all';
   public anyRemainingModel: boolean = true;
   public selectedTodo: Todo = null;
-
-  private params: Params;
 
   constructor(public todoListService: TodoListService) {}
 
@@ -81,7 +74,6 @@ export class TodoListComponent {
 
   public selectTodo(todo: TodoModel) {
     if (this.canSelect(todo)) {
-      console.log(todo.id);
       this.todoSelect.emit(todo.id);
       this.selectedTodo = todo;
     }

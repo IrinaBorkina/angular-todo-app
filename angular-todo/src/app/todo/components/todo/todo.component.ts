@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TodoListService } from '../../services/todo-list/todo-list.service';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { TodoModel } from '../../models/Todo';
 
 @Component({
@@ -11,6 +11,7 @@ import { TodoModel } from '../../models/Todo';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -39,6 +40,6 @@ export class TodoComponent implements OnInit {
   }
 
   handleTodoSelect($event: string) {
-    this.router.navigate(['/todos', $event]);
+    this.router.navigate(['/todos', $event, 'details-todo']);
   }
 }

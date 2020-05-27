@@ -1,16 +1,26 @@
-<button class="btn btn-outline-success item__button" routerLink="/todos">
-  <i class="fa fa-arrow-left"></i> Back
-</button>
+<div class="mt-3">
+  <button class="btn btn-outline-success item__button" routerLink="/todos">
+    <i class="fa fa-arrow-left"></i> Back
+  </button>
+</div>
 
-<div class="todo-details">
-  <div class="title">Todo details:</div>
-   <div class="todo-details__id">
-      <!-- {{ todo.id }} -->
-  </div>
-  <!--<div class="todo-details__title">
-      {{ todo.title }}
-  </div>
-  <div class="todo-details__status">
-      {{ todo.status }}
-  </div> -->
+<div class="todo-details d-flex flex-column justify-content-center align-items-center" *ngIf="todo">
+  <div class="todo-details__title m-3 font-weight-bold">Todo details:</div>
+
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th scope="col" class="text-uppercase">id</th>
+        <th scope="col" class="text-uppercase">description</th>
+        <th scope="col" class="text-uppercase">completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{ todo.id }}</th>
+        <td>{{ todo.title }}</td>
+        <td>{{ todo.status }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

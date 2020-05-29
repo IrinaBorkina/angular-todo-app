@@ -2,16 +2,17 @@ export interface TodoModel {
   id: number;
   title: string;
   status: boolean;
+  date: Date;
   equals(todo: TodoModel): boolean;
 }
 
 export class Todo implements TodoModel {
-  constructor(public id: number, public title: string, public status: boolean = false) {
+  constructor(public id: number, public title: string, public status: boolean = false, public date: Date) {
   }
 
   public static fromJSON(json: any): TodoModel {
     return Boolean(json)
-      ? new Todo(json.id, json.title, json.status)
+      ? new Todo(json.id, json.title, json.status, json.date)
       : null;
   }
 
@@ -20,7 +21,8 @@ export class Todo implements TodoModel {
       ? {
         id: todo.id,
         title: todo.title,
-        status: todo.status
+        status: todo.status,
+        date: todo.date
       }
       : {};
   }
@@ -29,6 +31,7 @@ export class Todo implements TodoModel {
     return Boolean(todo)
       && this.id === todo.id
       && this.title === todo.title
-      && this.status === todo.status;
+      && this.status === todo.status
+      && this.date === todo.date;
   }
 }

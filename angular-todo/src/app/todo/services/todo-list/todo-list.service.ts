@@ -43,7 +43,7 @@ export class TodoListService implements OnDestroy {
   }
 
   public todoCreated(title: string): void {
-    this.todos = [...this.todos, new Todo(Math.floor(Math.random() * 1000), title, false)];
+    this.todos = [...this.todos, new Todo(Math.floor(Math.random() * 1000), title, false, new Date())];
     this.todos$.next(this.todos);
   }
 

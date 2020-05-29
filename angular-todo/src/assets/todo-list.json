@@ -2,26 +2,31 @@
   {
     "id": 1,
     "title": "Learn Angular",
-    "status": true
+    "status": true,
+    "date": "01/01/2020"
   },
   {
     "id": 2,
     "title": "Training",
-    "status": false
+    "status": false,
+    "date": "02/02/2020"
   },
   {
     "id": 3,
     "title": "Eat an apple",
-    "status": false
+    "status": false,
+    "date": "03/03/2020"
   },
   {
     "id": 4,
     "title": "Buy a car",
-    "status": true
+    "status": true,
+    "date": "04/04/2020"
   },
   {
     "id": 5,
     "title": "Call Mom",
-    "status": false
+    "status": false,
+    "date": "05/05/2020"
   }
 ]

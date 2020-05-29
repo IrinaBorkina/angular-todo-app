@@ -13,6 +13,7 @@
         <th scope="col" class="text-uppercase">id</th>
         <th scope="col" class="text-uppercase">description</th>
         <th scope="col" class="text-uppercase">completed</th>
+        <th scope="col" class="text-uppercase">date</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
         <th scope="row">{{ todo.id }}</th>
         <td>{{ todo.title }}</td>
         <td>{{ todo.status }}</td>
+        <td >{{ todo.date | date:'medium' }}</td>
       </tr>
     </tbody>
   </table>

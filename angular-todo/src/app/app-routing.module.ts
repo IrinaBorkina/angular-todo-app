@@ -4,15 +4,23 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { CanProceedToAboutGuard } from './guards/can-proceed-to-about.guard';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {
@@ -24,7 +32,11 @@ const routes: Routes = [
         component: AboutMeComponent,
       },
     ],
-    canActivate: [CanProceedToAboutGuard],
+    canActivate: [AuthGuard, CanProceedToAboutGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: '**',

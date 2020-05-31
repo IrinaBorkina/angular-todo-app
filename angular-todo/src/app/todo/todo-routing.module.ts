@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
+import { AuthGuard } from '../guards/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: 'todos',
     component: TodoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'todos/:id',
@@ -19,7 +21,6 @@ const routes: Routes = [
       {
         path: 'details-todo',
         component: TodoDetailsComponent,
-        // loadChildren: () => import('./components/todo-details/todo-details.module').then(m => m.TodoDetailsModule)
       },
     ],
   },
@@ -27,6 +28,7 @@ const routes: Routes = [
     path: 'todo-list',
     redirectTo: '/todos',
     pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
 ];
 

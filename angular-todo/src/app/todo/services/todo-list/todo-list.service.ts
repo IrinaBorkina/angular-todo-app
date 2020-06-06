@@ -1,10 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { TodoModel, Todo } from '../../models/Todo';
+import { TodoModel } from '../../models/Todo';
 import { TodoDataService } from '../todo-data/todo-data.service';
 import { combineLatest, Subject, ReplaySubject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { TodoListSetting } from '../../models/todo-list-settings';
-
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../app.reducer';
+import * as actions from '../../todo.actions';
 
 @Injectable()
 export class TodoListService implements OnDestroy {
@@ -12,29 +14,22 @@ export class TodoListService implements OnDestroy {
   public id: number;
 
   private destroySubject$: Subject<boolean> = new Subject<boolean>();
-  public todos$: ReplaySubject<TodoModel[]> = new ReplaySubject<TodoModel[]>(1);
-  public settings$: ReplaySubject<TodoListSetting> = new ReplaySubject<TodoListSetting>();
+  public todos$ = this.store.select((state) => state.todos);
+  public settings$: ReplaySubject<TodoListSetting> = new ReplaySubject<
+    TodoListSetting
+  >();
 
-  constructor( private todoDataService: TodoDataService ) {
-
+  constructor(
+    private todoDataService: TodoDataService,
+    private store: Store<AppState>
+  ) {
     combineLatest([
-      this.todoDataService.loadTodoList()
-        .pipe(
-          take(1),
-          takeUntil(this.destroySubject$)
-        ),
-
-      this.todoDataService.loadSettings()
-      .pipe(
-        take(1),
-        takeUntil(this.destroySubject$)
-      )])
-    .subscribe(([todos, settings]: [TodoModel[], TodoListSetting]) => {
-      this.todos = todos;
-      this.todos$.next(todos);
+      this.todoDataService
+        .loadSettings()
+        .pipe(take(1), takeUntil(this.destroySubject$)),
+    ]).subscribe(([settings]: [TodoListSetting]) => {
       this.settings$.next(settings);
     });
-
   }
 
   ngOnDestroy() {
@@ -42,14 +37,16 @@ export class TodoListService implements OnDestroy {
     this.destroySubject$.complete();
   }
 
-  public todoCreated(title: string): void {
-    this.todos = [...this.todos, new Todo(Math.floor(Math.random() * 1000), title, false, new Date())];
-    this.todos$.next(this.todos);
+  public loadTodo() {
+    this.store.dispatch(actions.load());
   }
 
-  public deleteTodo(id: number): void {
-    this.todos = this.todos.filter(todo => todo.id !== id);
-    this.todos$.next(this.todos);
+  public todoCreated(title: string) {
+    this.store.dispatch(actions.create({ title }));
+  }
+
+  public deleteTodo(id: number) {
+    this.store.dispatch(actions.remove({ id }));
   }
 
   public save(): void {
